@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { AuthButtons } from "@/components/layout/auth-buttons";
 
 function HamburgerIcon() {
   return (
@@ -44,7 +45,7 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-3">
           <Button variant="primary" size="sm">Subscribe</Button>
-          <Button variant="outline" size="sm">Login</Button>
+          <AuthButtons />
         </div>
       </div>
     </header>
