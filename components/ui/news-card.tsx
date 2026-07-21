@@ -1,5 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useSession } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
 import { BiasMeter } from "./bias-meter";
 import type { NewsArticleCard } from "@/lib/types";
@@ -19,9 +23,20 @@ function InfoIcon() {
 }
 
 export function NewsCard({ article, className }: NewsCardProps) {
+  const { session } = useSession();
+  const router = useRouter();
+
+  function handleClick(e: React.MouseEvent) {
+    if (!session) {
+      e.preventDefault();
+      router.push("/sign-in");
+    }
+  }
+
   return (
     <Link
       href={`/news/${article.id}`}
+      onClick={handleClick}
       className={cn(
         "group block overflow-hidden rounded-lg border border-border bg-bg-primary shadow-sm transition-shadow hover:shadow-md",
         className,
